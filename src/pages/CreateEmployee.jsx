@@ -1,32 +1,82 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+// https://www.npmjs.com/package/react-datepicker & https://date-fns.org/v2.0.0-alpha.18/docs/I18n
+import DatePicker from "react-datepicker";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { formatDistance } from "date-fns/esm";
+import { fr } from "date-fns/esm/locale";
+// https://react-select.com/home#getting-started
+import Select from "react-select";
+// import { departmentOptions } from "../utils/utilsData"; // FIXME
 
+// Styled components
+const CreateEmployeeMain = styled.main({
+    display: "flex",
+    justifyContent: "center",
+  }),
+  CreateEmployeeForm = styled.form({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "30%",
+  }),
+  CreateEmployeeFieldset = styled.fieldset({
+    display: "flex",
+    flexDirection: "column",
+  });
+
+/**
+ * Component page
+ * @returns
+ */
 const CreateEmployee = () => {
-  // TODO controlled inputs
+  // TODO peut-etre supprimer controlled inputs https://dmitripavlutin.com/controlled-inputs-using-react-hooks/#:~:text=The%20controlled%20component%20is%20a,to%20access%20the%20input%20value
   const [value, setValue] = useState("");
   const onChange = (event) => {
     setValue(event.target.value);
   };
 
-  const CreateEmployeeMain = styled.main({
-      display: "flex",
-      justifyContent: "center",
-    }),
-    CreateEmployeeForm = styled.form({
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      width: "30%",
-    }),
-    CreateEmployeeFieldset = styled.fieldset({
-      display: "flex",
-      flexDirection: "column",
-    });
+  // datePicker
+  const [birthDate, setBirthDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const locales = { fr };
+  registerLocale("fr", fr);
+
+  // react-select FIXME importer depuis utils/data
+  const departmentOptions = [
+    { value: "sales", label: "Sales" },
+    { value: "marketing", label: "Marketing" },
+    { value: "engineering", label: "Engineering" },
+    { value: "humanResources", label: "Human Resources" },
+    { value: "legal", label: "Legal" },
+  ];
+
+  const statesOptions = [
+    { value: "sales", label: "Sales" },
+    { value: "marketing", label: "Marketing" },
+    { value: "engineering", label: "Engineering" },
+    { value: "humanResources", label: "Human Resources" },
+    { value: "legal", label: "Legal" },
+  ];
+
+  // react-select handle selected options
+  const [selectedDepartmentOptions, setSelectedDepartmentOptions] = useState(
+    null
+  );
+  const [selectedStatesOptions, setSelectedStatesOptions] = useState(null);
+
+  /** manage submit form */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+    alert("données envoyées !");
+  };
 
   return (
     <CreateEmployeeMain>
-      <CreateEmployeeForm>
+      <CreateEmployeeForm onSubmit={handleSubmit}>
         <div>Input value: {value}</div>
         <input value={value} onChange={onChange} />
         <label htmlFor="first-name">First Name</label>
@@ -34,27 +84,48 @@ const CreateEmployee = () => {
         <label htmlFor="last-name">Last Name</label>
         <input type="text" id="last-name" />
         <label htmlFor="date-of-birth">Date of Birth</label>
-        <input id="date-of-birth" type="text" />
+        <DatePicker // TODO fix UI peut-être qu'il faut afficher un composant date et pas un DateTime ou j'ai enlevé la date
+          selected={birthDate}
+          onChange={(date) => setBirthDate(date)}
+          dateFormat="dd/MM/yyyy"
+          locale={fr}
+          id="date-of-birth"
+        />
         <label htmlFor="start-date">Start Date</label>
-        <input id="start-date" type="text" />
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          timeInputLabel="Time:"
+          dateFormat="dd/MM/yyyy hh:mm aa"
+          showTimeInput
+          locale={fr}
+          id="start-date"
+        />
         <CreateEmployeeFieldset>
           <legend>Address</legend>
           <label htmlFor="street">Street</label>
           <input id="street" type="text" />
           <label htmlFor="city">City</label>
           <input id="city" type="text" />
+          <label htmlFor="state">State</label>
+          <Select
+            name="state"
+            id="state"
+            options={statesOptions}
+            defaultValue={selectedStatesOptions}
+            onChange={setSelectedStatesOptions}
+          />
           <label htmlFor="zip-code">Zip Code</label>
           <input id="zip-code" type="number" />
         </CreateEmployeeFieldset>
         <label htmlFor="department-button">Department</label>
-        <select name="department" id="department">
-          {/* TODO better way */}
-          <option>Sales</option>
-          <option>Marketing</option>
-          <option>Engineering</option>
-          <option>Human Resources</option>
-          <option>Legal</option>
-        </select>
+        <Select
+          name="department"
+          id="department"
+          options={departmentOptions}
+          defaultValue={selectedDepartmentOptions}
+          onChange={setSelectedDepartmentOptions}
+        />
         <input type="submit" value="Save" />
       </CreateEmployeeForm>
     </CreateEmployeeMain>

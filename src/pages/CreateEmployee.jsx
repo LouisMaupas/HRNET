@@ -90,6 +90,7 @@ const CreateEmployee = () => {
           dateFormat="dd/MM/yyyy"
           locale={fr}
           id="date-of-birth"
+          // TODO text-align: center;
         />
         <label htmlFor="start-date">Start Date</label>
         <DatePicker
@@ -100,6 +101,7 @@ const CreateEmployee = () => {
           showTimeInput
           locale={fr}
           id="start-date"
+          // TODO text-align: center;
         />
         <CreateEmployeeFieldset>
           <legend>Address</legend>

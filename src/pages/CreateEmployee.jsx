@@ -69,16 +69,39 @@ const CreateEmployee = () => {
 
   /** manage submit form */
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
-    alert("données envoyées !");
+    e.preventDefault()
+    const data = {  
+      first: e.target[0].value, 
+      last: e.target[1].value, 
+      birth: e.target[2].value, 
+      start: e.target[3].value, 
+      adress: document.getElementById('street').value, 
+      city: document.getElementById('city').value, 
+      state: e.target[6].value, 
+      zip: document.getElementById('zip-code').value, 
+      department: e.target[8].value 
+    };
+      
+    if(localStorage.employees === undefined) {
+      data.id = 1
+      // stringify data object before storing it
+      localStorage.setItem('employees', JSON.stringify([data]));
+      alert('employé enregistré [UTILISER PLUGIN MODALE]')
+    } else {
+      // retrieve and parse the object from storage
+      const retrievedEmployees = JSON.parse(localStorage.getItem('employees'));
+        data.id = retrievedEmployees.length +1
+        const employees = retrievedEmployees
+        employees.push(data)
+        localStorage.removeItem('employees')
+        localStorage.setItem('employees', JSON.stringify(employees));
+        alert('employé enregistré [UTILISER PLUGIN MODALE]')
+    }
   };
 
   return (
     <CreateEmployeeMain>
       <CreateEmployeeForm onSubmit={handleSubmit}>
-        <div>Input value: {value}</div>
-        <input value={value} onChange={onChange} />
         <label htmlFor="first-name">First Name</label>
         <input type="text" id="first-name" />
         <label htmlFor="last-name">Last Name</label>

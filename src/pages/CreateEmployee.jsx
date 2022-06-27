@@ -32,12 +32,6 @@ const CreateEmployeeMain = styled.main({
  * @returns
  */
 const CreateEmployee = () => {
-  // TODO peut-etre supprimer controlled inputs https://dmitripavlutin.com/controlled-inputs-using-react-hooks/#:~:text=The%20controlled%20component%20is%20a,to%20access%20the%20input%20value
-  const [value, setValue] = useState("");
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
-
   // datePicker
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());

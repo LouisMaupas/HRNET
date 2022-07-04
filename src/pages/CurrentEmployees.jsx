@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 import styled from "styled-components";
-import Table from "../components/Table"
-import TableDeux from "../components/TableDeux"
+import Table from "../components/Table";
+// import TableDeux from "../components/TableDeux"
 
 // lib pour tableaux +/- par ordre de preference
 /*
@@ -32,7 +32,7 @@ const CurrentEmployees = () => {
       <CurrentEmployeeMain>
         <Table />
         {/* <TableDeux></TableDeux> */}
-        </CurrentEmployeeMain>
+      </CurrentEmployeeMain>
     </>
   );
 };

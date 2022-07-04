@@ -9,8 +9,9 @@ import { formatDistance } from "date-fns/esm";
 import { fr } from "date-fns/esm/locale";
 // https://react-select.com/home#getting-started
 import Select from "react-select";
-// import { departmentOptions } from "../utils/utilsData"; // FIXME
-
+import { statesOptions } from "../utils/data/states";
+import departmentOptions from "../utils/data/departments";
+import style from "../utils/style";
 // Styled components
 const CreateEmployeeMain = styled.main({
     display: "flex",
@@ -38,61 +39,42 @@ const CreateEmployee = () => {
   const locales = { fr };
   registerLocale("fr", fr);
 
-  // react-select FIXME importer depuis utils/data
-  const departmentOptions = [
-    { value: "sales", label: "Sales" },
-    { value: "marketing", label: "Marketing" },
-    { value: "engineering", label: "Engineering" },
-    { value: "humanResources", label: "Human Resources" },
-    { value: "legal", label: "Legal" },
-  ];
-
-  const statesOptions = [
-    { value: "sales", label: "Sales" },
-    { value: "marketing", label: "Marketing" },
-    { value: "engineering", label: "Engineering" },
-    { value: "humanResources", label: "Human Resources" },
-    { value: "legal", label: "Legal" },
-  ];
-
   // react-select handle selected options
-  const [selectedDepartmentOptions, setSelectedDepartmentOptions] = useState(
-    null
-  );
+  const [selectedDepartmentOptions, setSelectedDepartmentOptions] =
+    useState(null);
   const [selectedStatesOptions, setSelectedStatesOptions] = useState(null);
 
   /** manage submit form */
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const data = {  
-      first: e.target[0].value, 
-      last: e.target[1].value, 
-      birth: e.target[2].value, 
-      start: e.target[3].value, 
-      adress: document.getElementById('street').value, 
-      city: document.getElementById('city').value, 
-      state: e.target[6].value, 
-      zip: document.getElementById('zip-code').value, 
-      department: e.target[8].value 
+    e.preventDefault();
+    const data = {
+      first: e.target[0].value,
+      last: e.target[1].value,
+      birth: e.target[2].value,
+      start: e.target[3].value,
+      adress: document.getElementById("street").value,
+      city: document.getElementById("city").value,
+      state: e.target[6].value,
+      zip: document.getElementById("zip-code").value,
+      department: e.target[8].value,
     };
-      
-    if(localStorage.employees === undefined) {
-      data.id = 1
+
+    if (localStorage.employees === undefined) {
+      data.id = 1;
       // stringify data object before storing it
-      localStorage.setItem('employees', JSON.stringify([data]));
-      alert('employé enregistré [UTILISER PLUGIN MODALE]')
+      localStorage.setItem("employees", JSON.stringify([data]));
+      alert("employé enregistré [UTILISER PLUGIN MODALE]");
     } else {
       // retrieve and parse the object from storage
-      const retrievedEmployees = JSON.parse(localStorage.getItem('employees'));
-        data.id = retrievedEmployees.length +1
-        const employees = retrievedEmployees
-        employees.push(data)
-        localStorage.removeItem('employees')
-        localStorage.setItem('employees', JSON.stringify(employees));
-        alert('employé enregistré [UTILISER PLUGIN MODALE]')
+      const retrievedEmployees = JSON.parse(localStorage.getItem("employees"));
+      data.id = retrievedEmployees.length + 1;
+      const employees = retrievedEmployees;
+      employees.push(data);
+      localStorage.removeItem("employees");
+      localStorage.setItem("employees", JSON.stringify(employees));
+      alert("employé enregistré [UTILISER PLUGIN MODALE]");
     }
   };
-
   return (
     <CreateEmployeeMain>
       <CreateEmployeeForm onSubmit={handleSubmit}>

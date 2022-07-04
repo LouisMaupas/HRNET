@@ -1,34 +1,35 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import style from "../utils/style"; FIXME
+import style from "../utils/style";
 import wealthHealthLogo from "../public/img/logo.jpg";
 
 // Styled components
 const HeaderHeader = styled.header({
     margin: "0 0 1rem 0",
-    backgroundColor: "blue",
   }),
   HeaderNav = styled.nav({
     display: "flex",
     justifyContent: "center",
-    "& > a": {
-      margin: "0 1rem 0.5rem 1rem",
-      textDecoration: "none",
-      color: "green",
-      fontWeight: "bold",
-      fontSize: "1.5rem",
-      ":hover": {
-        color: "black",
-        fontSize: "1.6rem",
-        marginBottom: "0",
-      },
-    },
   }),
   HeaderTitle = styled.h1({
     display: "flex",
     justifyContent: "center",
   });
+
+const NavbarLink = styled(Link)`
+  // FIXME cancel le style de la page
+  // background-color: ${style.primaryColor};
+  // color: black;
+  // margin: "0 1rem 0.5rem 1rem";
+  // text-decoration: "none";
+  // font-weight: "bold;
+  // font-size: "1.5rem";
+  // &:hover {
+  //   color: "black";
+  //   margin-bottom: 0;
+  // }
+`;
 
 /**
  * header component
@@ -43,6 +44,7 @@ const Header = () => {
   useEffect(() => {
     currentPage = window.location.pathname;
   });
+
   return (
     <HeaderHeader>
       <HeaderTitle>
@@ -50,18 +52,18 @@ const Header = () => {
         <span>Hrnet</span>
       </HeaderTitle>
       <HeaderNav>
-        <Link
+        <NavbarLink
           className={currentPage === "/create" ? "link--active" : null}
           to="/create"
         >
           Create Employee
-        </Link>
-        <Link
+        </NavbarLink>
+        <NavbarLink
           className={currentPage === "/current" ? "link--active" : null}
           to="/current"
         >
           Current Employees
-        </Link>
+        </NavbarLink>
       </HeaderNav>
     </HeaderHeader>
   );

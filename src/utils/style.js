@@ -1,8 +1,8 @@
 const style = {
-  primaryColor: "green",
-  primaryColorDarker: "green",
-  secondaryColor: "yellow",
-  secondaryColorLighter: "yellow",
+  primaryColor: "#CCFFCC",
+  primaryColorDarker: "#CCCCCC",
+  secondaryColor: "#FFFFDD",
+  secondaryColorLighter: "#FFFFEE",
   activeLink: "white",
 };
 

@@ -318,8 +318,6 @@ export default function EnhancedTable() {
   // search component
   const [searched, setSearched] = useState("");
   const [rows, setRows] = useState(originalRows);
-  // const classes = useStyles();
-
   const requestSearch = (searchedVal) => {
     const filteredRows = originalRows.filter((row) => {
       return (
@@ -336,7 +334,6 @@ export default function EnhancedTable() {
     });
     setRows(filteredRows);
   };
-
   const cancelSearch = () => {
     setSearched("");
     requestSearch(searched);

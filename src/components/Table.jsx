@@ -102,9 +102,9 @@ function descendingComparator(a, b, orderBy) {
 }
 
 /**
- *
- * @param {*} order
- * @param {*} orderBy
+ * Get comparator asc/desc for stableSort()
+ * @param {*} order desc or asc
+ * @param {*} orderBy column
  * @returns
  */
 function getComparator(order, orderBy) {
@@ -113,7 +113,12 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// This method is created for cross-browser compatibility with IE11 // Array.prototype.sort()
+/**
+ * Array.prototype.sort() for cross-browser compatibility with IE11
+ * @param {*} array data Formated
+ * @param {*} comparator getComparator()
+ * @returns
+ */
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -126,7 +131,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-//
 const headCells = [
   {
     id: "First",
@@ -311,7 +315,7 @@ EnhancedTableToolbar.propTypes = {
 };
 
 /**
- *
+ * Table component + search component
  * @returns
  */
 export default function EnhancedTable() {
@@ -347,12 +351,18 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  /**
+   * handle sort feature
+   * @param {*} event
+   * @param {*} property
+   */
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
+  // FIXME useless ?
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.first);
@@ -362,6 +372,7 @@ export default function EnhancedTable() {
     setSelected([]);
   };
 
+  // FIXME useless ?
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -386,11 +397,19 @@ export default function EnhancedTable() {
     setPage(newPage);
   };
 
+  /**
+   * Handle rows per page
+   * @param {*} event
+   */
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
+  /**
+   * Handle change dense controle
+   * @param {*} event
+   */
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
@@ -494,10 +513,10 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* <FormControlLabel
+      <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
-      /> */}
+      />
     </Box>
   );
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -19,6 +20,7 @@ import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { uuid } from "uuidv4";
+import SearchBar from "material-ui-search-bar";
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from "@mui/utils";
@@ -65,9 +67,9 @@ function createData(
 }
 
 // stock data
-const rows = [];
+const originalRows = [];
 retrievedEmployees.forEach((employe) => {
-  rows.push(
+  originalRows.push(
     createData(
       employe.first,
       employe.last,
@@ -313,6 +315,34 @@ EnhancedTableToolbar.propTypes = {
  * @returns
  */
 export default function EnhancedTable() {
+  // search component
+  const [searched, setSearched] = useState("");
+  const [rows, setRows] = useState(originalRows);
+  // const classes = useStyles();
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = originalRows.filter((row) => {
+      return (
+        row.first.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.last.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.adress.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.birth.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.city.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.department.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.start.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.state.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.zip.toLowerCase().includes(searchedVal.toLowerCase())
+      );
+    });
+    setRows(filteredRows);
+  };
+
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
+  // table component
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("First");
   const [selected, setSelected] = React.useState([]);
@@ -377,6 +407,11 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
+        <SearchBar
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table

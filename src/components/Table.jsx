@@ -66,23 +66,21 @@ function createData(
 
 // stock data
 const rows = [];
-if (retrievedEmployees) {
-  retrievedEmployees.forEach((employe) => {
-    rows.push(
-      createData(
-        employe.first,
-        employe.last,
-        employe.start,
-        employe.department,
-        employe.birth,
-        employe.adress,
-        employe.city,
-        employe.state,
-        employe.zip
-      )
-    );
-  });
-}
+retrievedEmployees.forEach((employe) => {
+  rows.push(
+    createData(
+      employe.first,
+      employe.last,
+      employe.start,
+      employe.department,
+      employe.birth,
+      employe.adress,
+      employe.city,
+      employe.state,
+      employe.zip
+    )
+  );
+});
 
 /**
  *
@@ -113,8 +111,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
+// This method is created for cross-browser compatibility with IE11 // Array.prototype.sort()
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -219,8 +216,7 @@ function EnhancedTableHead(props) {
         </TableCell> */}
         {headCells.map((headCell, i) => (
           <TableCell
-            key={`${headCell.id}-${i}`}
-            // key={headCell.id}
+            key={`${uuid()}`}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -317,8 +313,8 @@ EnhancedTableToolbar.propTypes = {
  * @returns
  */
 export default function EnhancedTable() {
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [order, setOrder] = React.useState("desc");
+  const [orderBy, setOrderBy] = React.useState("First");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(true);
@@ -380,7 +376,6 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      {/* ENTRE ICI {window.env.TEST ? "oui" : "non"} ET LA */}
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -425,14 +420,14 @@ export default function EnhancedTable() {
                           }}
                         />
                       </TableCell> */}
-                      <TableCell
+                      {/* <TableCell
                         component="th"
                         id={labelId}
                         scope="row"
                         padding="none"
                       >
                         {row.first}
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell align="right">{row.first}</TableCell>
                       <TableCell align="right">{row.last}</TableCell>
                       <TableCell align="right">{row.start}</TableCell>

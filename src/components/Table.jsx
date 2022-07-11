@@ -512,7 +512,13 @@ export default function EnhancedTable() {
         />
       </Paper>
       <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        control={
+          <Switch
+            checked={dense}
+            color="success"
+            onChange={handleChangeDense}
+          />
+        }
         label="Dense padding"
       />
     </Box>

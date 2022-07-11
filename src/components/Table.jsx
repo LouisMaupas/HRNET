@@ -25,8 +25,6 @@ import SearchBar from "material-ui-search-bar";
 // import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from "@mui/utils";
 
-// TODO SEARCH https://smartdevpreneur.com/the-easiest-way-to-implement-material-ui-table-search/
-
 const retrievedEmployees = JSON.parse(localStorage.getItem("employees"));
 
 /**
@@ -133,43 +131,43 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "First",
+    id: "first",
     numeric: false,
     disablePadding: true,
     label: "First Name",
   },
   {
-    id: "Last",
+    id: "last",
     numeric: false,
     disablePadding: false,
     label: "Last Name",
   },
   {
-    id: "Start",
+    id: "start",
     numeric: true,
     disablePadding: false,
     label: "Start Date",
   },
   {
-    id: "Department",
+    id: "department",
     numeric: true,
     disablePadding: false,
     label: "Department",
   },
   {
-    id: "Birth",
+    id: "birth",
     numeric: true,
     disablePadding: false,
     label: "Date of Birth",
   },
   {
-    id: "Street",
+    id: "street",
     numeric: false,
     disablePadding: false,
     label: "Street",
   },
   {
-    id: "City",
+    id: "city",
     numeric: false,
     disablePadding: false,
     label: "City",
@@ -181,7 +179,7 @@ const headCells = [
     label: "State",
   },
   {
-    id: "Zip",
+    id: "zip",
     numeric: true,
     disablePadding: false,
     label: "Zip Code",
@@ -345,7 +343,7 @@ export default function EnhancedTable() {
 
   // table component
   const [order, setOrder] = React.useState("desc");
-  const [orderBy, setOrderBy] = React.useState("First");
+  const [orderBy, setOrderBy] = React.useState("first");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(true);

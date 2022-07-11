@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./components/Header";
 import CreateEmployee from "./pages/CreateEmployee";
 import CurrentEmployees from "./pages/CurrentEmployees";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/create" element={<CreateEmployee />} />
         <Route path="/current" element={<CurrentEmployees />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

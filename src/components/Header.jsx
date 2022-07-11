@@ -45,7 +45,7 @@ const Header = () => {
           src={wealthHealthLogo}
           alt="wealth Health logo"
           width="100px"
-          height="100px"
+          height="92px"
         />
         <span>Hrnet</span>
       </HeaderTitle>

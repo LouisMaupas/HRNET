@@ -83,8 +83,8 @@ if (retrievedEmployees !== null) {
     );
   });
 } else {
-  alert(
-    "No registered employee. Use the form add some employees or reload the page"
+  console.log(
+    "No registered employee. Use the form to add some employees or reload the page."
   );
 }
 
@@ -296,7 +296,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          {/* Hrnet Employees */}
+          <span id="no-employee"></span>
         </Typography>
       )}
 

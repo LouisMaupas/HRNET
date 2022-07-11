@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 import styled from "styled-components";
 // https://www.npmjs.com/package/react-datepicker & https://date-fns.org/v2.0.0-alpha.18/docs/I18n
@@ -12,10 +14,12 @@ import Select from "react-select";
 import { statesOptions } from "../utils/data/states";
 import departmentOptions from "../utils/data/departments";
 import style from "../utils/style";
+
 // Styled components
 const CreateEmployeeMain = styled.main({
     display: "flex",
     justifyContent: "center",
+    textAlign: "center",
   }),
   CreateEmployeeForm = styled.form({
     display: "flex",
@@ -83,13 +87,12 @@ const CreateEmployee = () => {
         <label htmlFor="last-name">Last Name</label>
         <input type="text" id="last-name" />
         <label htmlFor="date-of-birth">Date of Birth</label>
-        <DatePicker // TODO fix UI peut-être qu'il faut afficher un composant date et pas un DateTime ou j'ai enlevé la date
+        <DatePicker
           selected={birthDate}
           onChange={(date) => setBirthDate(date)}
           dateFormat="dd/MM/yyyy"
           locale={fr}
           id="date-of-birth"
-          // TODO text-align: center;
         />
         <label htmlFor="start-date">Start Date</label>
         <DatePicker
@@ -100,7 +103,6 @@ const CreateEmployee = () => {
           showTimeInput
           locale={fr}
           id="start-date"
-          // TODO text-align: center;
         />
         <CreateEmployeeFieldset>
           <legend>Address</legend>
@@ -127,7 +129,10 @@ const CreateEmployee = () => {
           defaultValue={selectedDepartmentOptions}
           onChange={setSelectedDepartmentOptions}
         />
-        <input type="submit" value="Save" />
+        <br />
+        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+          Save
+        </Button>
       </CreateEmployeeForm>
     </CreateEmployeeMain>
   );

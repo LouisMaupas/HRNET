@@ -66,21 +66,27 @@ function createData(
 
 // stock data
 const originalRows = [];
-retrievedEmployees.forEach((employe) => {
-  originalRows.push(
-    createData(
-      employe.first,
-      employe.last,
-      employe.start,
-      employe.department,
-      employe.birth,
-      employe.adress,
-      employe.city,
-      employe.state,
-      employe.zip
-    )
+if (retrievedEmployees !== null) {
+  retrievedEmployees.forEach((employe) => {
+    originalRows.push(
+      createData(
+        employe.first,
+        employe.last,
+        employe.start,
+        employe.department,
+        employe.birth,
+        employe.adress,
+        employe.city,
+        employe.state,
+        employe.zip
+      )
+    );
+  });
+} else {
+  alert(
+    "No registered employee. Use the form add some employees or reload the page"
   );
-});
+}
 
 /**
  *

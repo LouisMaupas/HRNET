@@ -13,7 +13,6 @@ import { fr } from "date-fns/esm/locale";
 import Select from "react-select";
 import { statesOptions } from "../utils/data/states";
 import departmentOptions from "../utils/data/departments";
-import style from "../utils/style";
 
 // Styled components
 const CreateEmployeeMain = styled.main({

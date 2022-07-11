@@ -5,6 +5,7 @@ import style from "../utils/style";
 import wealthHealthLogo from "../public/img/logo.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import GroupsIcon from "@mui/icons-material/Groups";
+import HomeIcon from "@mui/icons-material/Home";
 
 // Styled components
 const HeaderHeader = styled.header({
@@ -44,6 +45,10 @@ const Header = () => {
         <span>Hrnet</span>
       </HeaderTitle>
       <HeaderNav>
+        <NavbarLink to="/">
+          <HomeIcon />
+          Home
+        </NavbarLink>
         <NavbarLink to="/create">
           <AddIcon />
           Create Employee

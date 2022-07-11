@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 import styled from "styled-components";
+import style from "../utils/style";
 // https://www.npmjs.com/package/react-datepicker & https://date-fns.org/v2.0.0-alpha.18/docs/I18n
 import DatePicker from "react-datepicker";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -19,6 +20,8 @@ const CreateEmployeeMain = styled.main({
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
+    flexDirection: "column",
+    alignItems: "center",
   }),
   CreateEmployeeForm = styled.form({
     display: "flex",
@@ -29,6 +32,18 @@ const CreateEmployeeMain = styled.main({
   CreateEmployeeFieldset = styled.fieldset({
     display: "flex",
     flexDirection: "column",
+  }),
+  Title = styled.h2({
+    textAlign: "center",
+    color: `${style.primaryColor}`,
+  }),
+  FormInputs = styled.div({
+    display: "flex",
+  }),
+  FormInputsBloc = styled.div({
+    display: "flex",
+    flexDirection: "column",
+    margin: "0 2rem 2rem 2rem",
   });
 
 /**
@@ -80,55 +95,61 @@ const CreateEmployee = () => {
   };
   return (
     <CreateEmployeeMain>
+      <Title> Create Employees</Title>
       <CreateEmployeeForm onSubmit={handleSubmit}>
-        <label htmlFor="first-name">First Name</label>
-        <input type="text" id="first-name" />
-        <label htmlFor="last-name">Last Name</label>
-        <input type="text" id="last-name" />
-        <label htmlFor="date-of-birth">Date of Birth</label>
-        <DatePicker
-          selected={birthDate}
-          onChange={(date) => setBirthDate(date)}
-          dateFormat="dd/MM/yyyy"
-          locale={fr}
-          id="date-of-birth"
-        />
-        <label htmlFor="start-date">Start Date</label>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          timeInputLabel="Time:"
-          dateFormat="dd/MM/yyyy hh:mm aa"
-          showTimeInput
-          locale={fr}
-          id="start-date"
-        />
-        <CreateEmployeeFieldset>
-          <legend>Address</legend>
-          <label htmlFor="street">Street</label>
-          <input id="street" type="text" />
-          <label htmlFor="city">City</label>
-          <input id="city" type="text" />
-          <label htmlFor="state">State</label>
-          <Select
-            name="state"
-            id="state"
-            options={statesOptions}
-            defaultValue={selectedStatesOptions}
-            onChange={setSelectedStatesOptions}
-          />
-          <label htmlFor="zip-code">Zip Code</label>
-          <input id="zip-code" type="number" />
-        </CreateEmployeeFieldset>
-        <label htmlFor="department-button">Department</label>
-        <Select
-          name="department"
-          id="department"
-          options={departmentOptions}
-          defaultValue={selectedDepartmentOptions}
-          onChange={setSelectedDepartmentOptions}
-        />
-        <br />
+        <FormInputs>
+          <FormInputsBloc>
+            <label htmlFor="first-name">First Name</label>
+            <input type="text" id="first-name" />
+            <label htmlFor="last-name">Last Name</label>
+            <input type="text" id="last-name" />
+            <label htmlFor="date-of-birth">Date of Birth</label>
+            <DatePicker
+              selected={birthDate}
+              onChange={(date) => setBirthDate(date)}
+              dateFormat="dd/MM/yyyy"
+              locale={fr}
+              id="date-of-birth"
+            />
+            <label htmlFor="start-date">Start Date</label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              timeInputLabel="Time:"
+              dateFormat="dd/MM/yyyy hh:mm aa"
+              showTimeInput
+              locale={fr}
+              id="start-date"
+            />
+          </FormInputsBloc>
+          <FormInputsBloc>
+            <CreateEmployeeFieldset>
+              <legend>Address</legend>
+              <label htmlFor="street">Street</label>
+              <input id="street" type="text" />
+              <label htmlFor="city">City</label>
+              <input id="city" type="text" />
+              <label htmlFor="state">State</label>
+              <Select
+                name="state"
+                id="state"
+                options={statesOptions}
+                defaultValue={selectedStatesOptions}
+                onChange={setSelectedStatesOptions}
+              />
+              <label htmlFor="zip-code">Zip Code</label>
+              <input id="zip-code" type="number" />
+            </CreateEmployeeFieldset>
+            <label htmlFor="department-button">Department</label>
+            <Select
+              name="department"
+              id="department"
+              options={departmentOptions}
+              defaultValue={selectedDepartmentOptions}
+              onChange={setSelectedDepartmentOptions}
+            />
+          </FormInputsBloc>
+        </FormInputs>
         <Button type="submit" variant="contained" endIcon={<SendIcon />}>
           Save
         </Button>

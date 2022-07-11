@@ -290,7 +290,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Hrnet Employees
+          {/* Hrnet Employees */}
         </Typography>
       )}
 

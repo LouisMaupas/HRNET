@@ -38,10 +38,20 @@ const Home = () => {
       <Main>
         <Welcome>Hello what do you want to do?</Welcome>
         <Buttons>
-          <Button type="submit" variant="contained" onClick={routeChange}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="success"
+            onClick={routeChange}
+          >
             Add an employee
           </Button>{" "}
-          <Button type="submit" variant="contained" onClick={routeChange}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="success"
+            onClick={routeChange}
+          >
             Consult the list of employees
           </Button>
         </Buttons>

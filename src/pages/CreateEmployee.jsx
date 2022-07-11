@@ -150,7 +150,12 @@ const CreateEmployee = () => {
             />
           </FormInputsBloc>
         </FormInputs>
-        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+        <Button
+          color="success"
+          type="submit"
+          variant="contained"
+          endIcon={<SendIcon />}
+        >
           Save
         </Button>
       </CreateEmployeeForm>

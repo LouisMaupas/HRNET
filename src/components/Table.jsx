@@ -360,7 +360,6 @@ export default function EnhancedTable() {
     setOrderBy(property);
   };
 
-  // FIXME useless ?
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.first);
@@ -370,7 +369,6 @@ export default function EnhancedTable() {
     setSelected([]);
   };
 
-  // FIXME useless ?
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];

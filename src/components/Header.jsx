@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import style from "../utils/style";
 import wealthHealthLogo from "../public/img/logo.jpg";
+import AddIcon from "@mui/icons-material/Add";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 // Styled components
 const HeaderHeader = styled.header({
@@ -18,17 +20,16 @@ const HeaderHeader = styled.header({
   });
 
 const NavbarLink = styled(Link)`
-  // FIXME cancel le style de la page
-  // background-color: ${style.primaryColor};
-  // color: black;
-  // margin: "0 1rem 0.5rem 1rem";
-  // text-decoration: "none";
-  // font-weight: "bold;
-  // font-size: "1.5rem";
-  // &:hover {
-  //   color: "black";
-  //   margin-bottom: 0;
-  // }
+  display: flex;
+  text-decoration: "none";
+  color: black;
+  margin: 0 1rem 0 1rem;
+  &:hover {
+    color: ${style.primaryColorDarker};
+  }
+  & > * {
+    margin-right: 0.5rem;
+  }
 `;
 
 /**
@@ -36,15 +37,6 @@ const NavbarLink = styled(Link)`
  * @returns
  */
 const Header = () => {
-  // FIXME comme le header ne recharge pas à chaque changement de page (car il est hors de <Route> )
-  // il faut utiliser le redux state qu'on modifie depuis <App>
-  /** nav link style */
-
-  let currentPage = "/";
-  useEffect(() => {
-    currentPage = window.location.pathname;
-  });
-
   return (
     <HeaderHeader>
       <HeaderTitle>
@@ -52,16 +44,12 @@ const Header = () => {
         <span>Hrnet</span>
       </HeaderTitle>
       <HeaderNav>
-        <NavbarLink
-          className={currentPage === "/create" ? "link--active" : null}
-          to="/create"
-        >
+        <NavbarLink to="/create">
+          <AddIcon />
           Create Employee
         </NavbarLink>
-        <NavbarLink
-          className={currentPage === "/current" ? "link--active" : null}
-          to="/current"
-        >
+        <NavbarLink to="/current">
+          <GroupsIcon />
           Current Employees
         </NavbarLink>
       </HeaderNav>

@@ -1,5 +1,5 @@
 const style = {
-  primaryColor: "#7aa37a",
+  primaryColor: "#395639",
   primaryColorDarker: "#CCCCCC",
   secondaryColor: "#093063",
   // secondaryColorLighter: "#FFFFEE",

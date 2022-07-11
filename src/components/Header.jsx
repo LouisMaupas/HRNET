@@ -41,7 +41,12 @@ const Header = () => {
   return (
     <HeaderHeader>
       <HeaderTitle>
-        <img src={wealthHealthLogo} alt="wealth Health logo" width="100px" />
+        <img
+          src={wealthHealthLogo}
+          alt="wealth Health logo"
+          width="100px"
+          height="100px"
+        />
         <span>Hrnet</span>
       </HeaderTitle>
       <HeaderNav>

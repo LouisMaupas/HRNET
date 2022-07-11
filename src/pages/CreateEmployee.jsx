@@ -6,9 +6,9 @@ import styled from "styled-components";
 import style from "../utils/style";
 // https://www.npmjs.com/package/react-datepicker & https://date-fns.org/v2.0.0-alpha.18/docs/I18n
 import DatePicker from "react-datepicker";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { formatDistance } from "date-fns/esm";
+// import { formatDistance } from "date-fns/esm";
 import { fr } from "date-fns/esm/locale";
 // https://react-select.com/home#getting-started
 import Select from "react-select";
@@ -54,7 +54,7 @@ const CreateEmployee = () => {
   // datePicker
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
-  const locales = { fr };
+  // const locales = { fr };
   registerLocale("fr", fr);
 
   // react-select handle selected options
@@ -65,6 +65,7 @@ const CreateEmployee = () => {
   /** manage submit form */
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target);
     const data = {
       first: e.target[0].value,
       last: e.target[1].value,
@@ -72,9 +73,9 @@ const CreateEmployee = () => {
       start: e.target[3].value,
       adress: document.getElementById("street").value,
       city: document.getElementById("city").value,
-      state: e.target[6].value,
+      state: e.target[8].value,
       zip: document.getElementById("zip-code").value,
-      department: e.target[8].value,
+      department: e.target[11].value,
     };
 
     if (localStorage.employees === undefined) {

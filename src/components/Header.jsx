@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import style from "../utils/style";
 import wealthHealthLogo from "../public/img/logo.jpg";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import GroupsIcon from "@mui/icons-material/Groups";
 import HomeIcon from "@mui/icons-material/Home";
 
@@ -50,7 +50,7 @@ const Header = () => {
           Home
         </NavbarLink>
         <NavbarLink to="/create">
-          <AddIcon />
+          <AddCircleIcon />
           Create Employee
         </NavbarLink>
         <NavbarLink to="/current">

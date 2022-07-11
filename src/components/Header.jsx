@@ -23,7 +23,7 @@ const HeaderHeader = styled.header({
 const NavbarLink = styled(Link)`
   display: flex;
   text-decoration: "none";
-  color: black;
+  color: ${style.secondaryColor};
   margin: 0 1rem 0 1rem;
   &:hover {
     color: ${style.primaryColorDarker};
@@ -46,15 +46,15 @@ const Header = () => {
       </HeaderTitle>
       <HeaderNav>
         <NavbarLink to="/">
-          <HomeIcon />
+          <HomeIcon color="success" />
           Home
         </NavbarLink>
         <NavbarLink to="/create">
-          <AddCircleIcon />
+          <AddCircleIcon color="success" />
           Create Employee
         </NavbarLink>
         <NavbarLink to="/current">
-          <GroupsIcon />
+          <GroupsIcon color="success" />
           Current Employees
         </NavbarLink>
       </HeaderNav>

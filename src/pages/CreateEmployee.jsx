@@ -16,8 +16,7 @@ import Select from "react-select";
 import { statesOptions } from "../utils/data/states";
 import departmentOptions from "../utils/data/departments";
 // state
-import { useGlobalState } from "../utils/state";
-import { setAddEmployee } from "../utils/state";
+import { setAddEmployee, getGlobalState } from "../utils/state";
 
 // Styled components
 const CreateEmployeeMain = styled.main({
@@ -55,9 +54,6 @@ const CreateEmployeeMain = styled.main({
  * @returns
  */
 const CreateEmployee = () => {
-  // state
-  const employeesValue = useGlobalState("employees");
-
   // datePicker
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -86,9 +82,10 @@ const CreateEmployee = () => {
 
     if (localStorage.employees === undefined) {
       data.id = 1;
-      // stringify data object before storing it
-      localStorage.setItem("employees", JSON.stringify([data]));
-      // setAddEmployee(JSON.stringify([data]))
+      setAddEmployee([data]);
+      // get data from state + stringify it before storing it
+      const employeesFromState = JSON.stringify(getGlobalState("employees"));
+      localStorage.setItem("employees", employeesFromState);
       alert("employé enregistré [UTILISER PLUGIN MODALE]");
     } else {
       // retrieve and parse the object from storage
@@ -98,14 +95,14 @@ const CreateEmployee = () => {
       employees.push(data);
       localStorage.removeItem("employees");
       setAddEmployee(employees);
-      console.log(employeesValue); // FIXME employeesValue est undefined
-      localStorage.setItem("employees", JSON.stringify(employeesValue));
+      const employeesFromState = getGlobalState("employees");
+      localStorage.setItem("employees", JSON.stringify(employeesFromState));
       alert("employé enregistré [UTILISER PLUGIN MODALE]");
     }
   };
   return (
     <CreateEmployeeMain>
-      <Title> Create Employees</Title> {employeesValue}
+      <Title> Create Employees</Title>
       <CreateEmployeeForm onSubmit={handleSubmit}>
         <FormInputs>
           <FormInputsBloc>

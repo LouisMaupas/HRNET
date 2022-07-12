@@ -1,10 +1,9 @@
 // https://www.npmjs.com/package/react-hooks-global-state
 import { createGlobalState } from "react-hooks-global-state";
 
-/** intial state  */
-const { setGlobalState, useGlobalState } = createGlobalState({
-  employees: null,
-});
+const initialState = { employees: "" };
+const { setGlobalState, useGlobalState, getGlobalState } =
+  createGlobalState(initialState);
 
 /**
  * hook
@@ -14,4 +13,4 @@ export const setAddEmployee = (employee) => {
   setGlobalState("employees", employee);
 };
 
-export { useGlobalState };
+export { useGlobalState, getGlobalState };

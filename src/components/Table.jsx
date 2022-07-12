@@ -25,69 +25,6 @@ import SearchBar from "material-ui-search-bar";
 // import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from "@mui/utils";
 
-const retrievedEmployees = JSON.parse(localStorage.getItem("employees"));
-
-/**
- * Format data
- * @param {*} first
- * @param {*} last
- * @param {*} start
- * @param {*} department
- * @param {*} birth
- * @param {*} adress
- * @param {*} city
- * @param {*} state
- * @param {*} zip
- * @returns
- */
-function createData(
-  first,
-  last,
-  start,
-  department,
-  birth,
-  adress,
-  city,
-  state,
-  zip
-) {
-  return {
-    first,
-    last,
-    start,
-    department,
-    birth,
-    adress,
-    city,
-    state,
-    zip,
-  };
-}
-
-// stock data
-const originalRows = [];
-if (retrievedEmployees !== null) {
-  retrievedEmployees.forEach((employe) => {
-    originalRows.push(
-      createData(
-        employe.first,
-        employe.last,
-        employe.start,
-        employe.department,
-        employe.birth,
-        employe.adress,
-        employe.city,
-        employe.state,
-        employe.zip
-      )
-    );
-  });
-} else {
-  console.log(
-    "No registered employee. Use the form to add some employees or reload the page."
-  );
-}
-
 /**
  *
  * @param {*} a
@@ -322,7 +259,8 @@ EnhancedTableToolbar.propTypes = {
  * Table component + search component
  * @returns
  */
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
+  const originalRows = props.data;
   // search component
   const [searched, setSearched] = useState("");
   const [rows, setRows] = useState(originalRows);

@@ -17,7 +17,7 @@ import { statesOptions } from "../utils/data/states";
 import departmentOptions from "../utils/data/departments";
 // state
 import { useGlobalState } from "../utils/state";
-import { setAddEmployee, CurrentEmployees } from "../utils/state";
+import { setAddEmployee } from "../utils/state";
 
 // Styled components
 const CreateEmployeeMain = styled.main({

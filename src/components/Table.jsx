@@ -26,7 +26,7 @@ import SearchBar from "material-ui-search-bar";
 import { visuallyHidden } from "@mui/utils";
 
 const retrievedEmployees = JSON.parse(localStorage.getItem("employees"));
-console.log(retrievedEmployees);
+
 /**
  * Format data
  * @param {*} first

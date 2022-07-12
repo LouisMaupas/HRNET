@@ -1,9 +1,10 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 import styled from "styled-components";
 import style from "../utils/style";
+// https://mui.com/material-ui/react-table/
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 // https://www.npmjs.com/package/react-datepicker & https://date-fns.org/v2.0.0-alpha.18/docs/I18n
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
@@ -14,6 +15,9 @@ import { fr } from "date-fns/esm/locale";
 import Select from "react-select";
 import { statesOptions } from "../utils/data/states";
 import departmentOptions from "../utils/data/departments";
+// state
+import { useGlobalState } from "../utils/state";
+import { setAddEmployee, CurrentEmployees } from "../utils/state";
 
 // Styled components
 const CreateEmployeeMain = styled.main({
@@ -51,6 +55,9 @@ const CreateEmployeeMain = styled.main({
  * @returns
  */
 const CreateEmployee = () => {
+  // state
+  const employeesValue = useGlobalState("employees");
+
   // datePicker
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -65,7 +72,6 @@ const CreateEmployee = () => {
   /** manage submit form */
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const data = {
       first: e.target[0].value,
       last: e.target[1].value,
@@ -82,6 +88,7 @@ const CreateEmployee = () => {
       data.id = 1;
       // stringify data object before storing it
       localStorage.setItem("employees", JSON.stringify([data]));
+      // setAddEmployee(JSON.stringify([data]))
       alert("employé enregistré [UTILISER PLUGIN MODALE]");
     } else {
       // retrieve and parse the object from storage
@@ -90,13 +97,15 @@ const CreateEmployee = () => {
       const employees = retrievedEmployees;
       employees.push(data);
       localStorage.removeItem("employees");
-      localStorage.setItem("employees", JSON.stringify(employees));
+      setAddEmployee(employees);
+      console.log(employeesValue); // FIXME employeesValue est undefined
+      localStorage.setItem("employees", JSON.stringify(employeesValue));
       alert("employé enregistré [UTILISER PLUGIN MODALE]");
     }
   };
   return (
     <CreateEmployeeMain>
-      <Title> Create Employees</Title>
+      <Title> Create Employees</Title> {employeesValue}
       <CreateEmployeeForm onSubmit={handleSubmit}>
         <FormInputs>
           <FormInputsBloc>

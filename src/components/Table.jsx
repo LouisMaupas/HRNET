@@ -66,7 +66,8 @@ function createData(
 
 // stock data
 const originalRows = [];
-if (retrievedEmployees !== null) {
+// if (retrievedEmployees !== null) { // TODO
+if (false) {
   retrievedEmployees.forEach((employe) => {
     originalRows.push(
       createData(

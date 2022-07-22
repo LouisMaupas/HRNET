@@ -17,6 +17,9 @@ import { statesOptions } from "../utils/data/states";
 import departmentOptions from "../utils/data/departments";
 // state
 import { setAddEmployee, getGlobalState } from "../utils/state";
+// modal
+import Modal from "react-modal-lm/dist/Modal";
+import useModal from "react-modal-lm/dist/hooks";
 
 // Styled components
 const CreateEmployeeMain = styled.main({
@@ -54,6 +57,9 @@ const CreateEmployeeMain = styled.main({
  * @returns
  */
 const CreateEmployee = () => {
+  // modal
+  const { isDysplayed: showModal, toggleModal: triggerModal } = useModal();
+
   // datePicker
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -86,7 +92,7 @@ const CreateEmployee = () => {
       // get data from state + stringify it before storing it
       const employeesFromState = JSON.stringify(getGlobalState("employees"));
       localStorage.setItem("employees", employeesFromState);
-      alert("employé enregistré [UTILISER PLUGIN MODALE]");
+      triggerModal();
     } else {
       // retrieve and parse the object from storage
       const retrievedEmployees = JSON.parse(localStorage.getItem("employees"));
@@ -97,9 +103,16 @@ const CreateEmployee = () => {
       setAddEmployee(employees);
       const employeesFromState = getGlobalState("employees");
       localStorage.setItem("employees", JSON.stringify(employeesFromState));
-      alert("employé enregistré [UTILISER PLUGIN MODALE]");
+      console.log("test");
+      exempleOfModalTrigger();
     }
   };
+
+  const {
+    isDisplayed: exempleOfModalToDisplay,
+    toggleModal: exempleOfModalTrigger,
+  } = useModal();
+
   return (
     <CreateEmployeeMain>
       <Title> Create Employees</Title>
@@ -166,6 +179,9 @@ const CreateEmployee = () => {
           Save
         </Button>
       </CreateEmployeeForm>
+      <Modal isShowing={exempleOfModalToDisplay} toggle={exempleOfModalTrigger}>
+        Employee saved
+      </Modal>
     </CreateEmployeeMain>
   );
 };
